@@ -12,9 +12,12 @@ const isDev = import.meta.env.MODE === "development";
 <template>
   <div class="h-screen w-screen flex justify-center items-center">
     <div class="md:w-1/2 flex flex-col items-center">
-      <div class="array-display flex items-center my-12">
-        <span class="bracket">[</span>
-
+      <TransitionGroup
+        tag="div"
+        class="relative array-display flex items-center my-12"
+        name="list"
+      >
+        <div class="bracket">[</div>
         <div
           v-if="type_size"
           v-for="prvek in array_size"
@@ -27,12 +30,12 @@ const isDev = import.meta.env.MODE === "development";
             :class="{ 'border-l': byte !== 1 }"
             class="byte-box"
           ></div>
-          <span class="index">
+          <div class="index">
             {{ show_count ? prvek - 1 : "" }}
-          </span>
+          </div>
         </div>
-        <span class="bracket">]</span>
-      </div>
+        <div class="bracket">]</div>
+      </TransitionGroup>
 
       <!-- Ovladani -->
       <div
@@ -74,3 +77,24 @@ const isDev = import.meta.env.MODE === "development";
     </div>
   </template>
 </template>
+
+<style lang="scss" scoped>
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+  transform: translateX(500px);
+}
+</style>
