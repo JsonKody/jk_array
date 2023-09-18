@@ -52,12 +52,33 @@ function redraw() {
     ])
     .range([height, 0]);
 
+  const tooltip = d3
+    .select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
   const svgContainer = d3
     .select(svg.value)
     .attr("width", svgWidth)
     .attr("height", svgHeight)
     .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
+    .attr("transform", `translate(${margin.left},${margin.top})`)
+    .on("mouseover", function (event, d) {
+      tooltip.transition().duration(200).style("opacity", 0.9);
+      tooltip
+        .html("Tvoje data")
+        .style("left", event.pageX + "px")
+        .style("top", event.pageY - 28 + "px");
+    })
+    .on("mousemove", function (event, d) {
+      tooltip
+        .style("left", event.pageX + "px")
+        .style("top", event.pageY - 28 + "px");
+    })
+    .on("mouseout", function (d) {
+      tooltip.transition().duration(500).style("opacity", 0);
+    });
 
   svgContainer.append("g").call(d3.axisLeft(yScale));
 
@@ -147,6 +168,6 @@ function isSelected(name: string): boolean {
 }
 
 .active {
-    color: rgb(0, 255, 149);
+  color: rgb(0, 255, 149);
 }
 </style>

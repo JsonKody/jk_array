@@ -69,7 +69,7 @@ const isDev = import.meta.env.MODE === "development";
   </div>
 
   <template v-if="isDev">
-    <div class="h-screen bg-black rd">
+    <div class="h-screen bg-gray-600 rd">
       <Chart />
     </div>
   </template>
