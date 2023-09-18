@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: rgb(30, 0, 75);
+  color: white;
+}
+
+input {
+  color: black;
+  border-radius: 0.3rem;
+  width: 3rem;
+}
+
+.input-group {
+  @apply mb-4 flex items-center justify-between;
+
+  &:last-child {
+    @apply mb-0;
+  }
+}
+
+@layer components {
+  .trans {
+    @apply transition duration-150;
+  }
+
+  .rd {
+    @apply border border-red-500;
+  }
+
+  .bracket {
+    @apply mx-2 text-purple-400 text-5xl mb-2.5;
+  }
+
+  .byte-box {
+    @apply w-4 h-4 cursor-pointer border-blue-300 flex justify-center items-center bg-blue-600 trans hover:bg-blue-400;
+  }
+
+  .array-element {
+    @apply relative mx-1 flex border-2 rounded-sm;
+  }
+
+  .index {
+    @apply text-xs absolute -top-5 -left-1;
+  }
+}
