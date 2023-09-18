@@ -5,6 +5,8 @@ import { ref } from "vue";
 const array_size = ref(4);
 const type_size = ref(4);
 const show_count = ref(false);
+
+const isDev = import.meta.env.MODE === "development";
 </script>
 
 <template>
@@ -66,7 +68,9 @@ const show_count = ref(false);
     </div>
   </div>
 
-  <div class="h-screen bg-black rd">
-    <Chart />
-  </div>
+  <template v-if="isDev">
+    <div class="h-screen bg-black rd">
+      <Chart />
+    </div>
+  </template>
 </template>
